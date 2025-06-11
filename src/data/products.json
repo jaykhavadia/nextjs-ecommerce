@@ -1,0 +1,182 @@
+[
+  {
+    "id": "1",
+    "name": "Wireless Headphones",
+    "description": "High-fidelity wireless headphones with noise cancellation.",
+    "price": 99.99,
+    "category": "Electronics",
+    "imageUrl": "/images/headphones.jpg",
+    "stock": 25
+  },
+  {
+    "id": "2",
+    "name": "Smart Watch",
+    "description": "Waterproof smart watch with heart-rate monitor.",
+    "price": 149.99,
+    "category": "Wearables",
+    "imageUrl": "/images/smartwatch.jpg",
+    "stock": 40
+  },
+  {
+    "id": "3",
+    "name": "Gaming Laptop",
+    "description": "15-inch gaming laptop with RTX 3060 GPU.",
+    "price": 1299.0,
+    "category": "Computers",
+    "imageUrl": "/images/laptop.jpg",
+    "stock": 10
+  },
+  {
+    "id": "4",
+    "name": "Bluetooth Speaker",
+    "description": "Portable Bluetooth speaker with 12-hour battery life.",
+    "price": 59.5,
+    "category": "Audio",
+    "imageUrl": "/images/speaker.jpg",
+    "stock": 30
+  },
+  {
+    "id": "5",
+    "name": "DSLR Camera",
+    "description": "24MP DSLR camera with 18-55mm kit lens.",
+    "price": 499.99,
+    "category": "Photography",
+    "imageUrl": "/images/camera.jpg",
+    "stock": 8
+  },
+  {
+    "id": "6",
+    "name": "Electric Toothbrush",
+    "description": "Rechargeable electric toothbrush with 3 modes.",
+    "price": 39.99,
+    "category": "Health",
+    "imageUrl": "/images/toothbrush.jpg",
+    "stock": 60
+  },
+  {
+    "id": "7",
+    "name": "Yoga Mat",
+    "description": "Eco-friendly non-slip yoga mat, 6mm thick.",
+    "price": 25.0,
+    "category": "Fitness",
+    "imageUrl": "/images/yogamat.jpg",
+    "stock": 100
+  },
+  {
+    "id": "8",
+    "name": "Espresso Machine",
+    "description": "Automatic espresso machine with milk frother.",
+    "price": 229.0,
+    "category": "Kitchen",
+    "imageUrl": "/images/espresso.jpg",
+    "stock": 12
+  },
+  {
+    "id": "9",
+    "name": "Gaming Chair",
+    "description": "Ergonomic gaming chair with lumbar support.",
+    "price": 199.99,
+    "category": "Furniture",
+    "imageUrl": "/images/chair.jpg",
+    "stock": 15
+  },
+  {
+    "id": "10",
+    "name": "4K Monitor",
+    "description": "27-inch 4K UHD monitor with HDR10 support.",
+    "price": 329.99,
+    "category": "Monitors",
+    "imageUrl": "/images/monitor.jpg",
+    "stock": 20
+  },
+  {
+    "id": "11",
+    "name": "Mechanical Keyboard",
+    "description": "RGB mechanical keyboard with brown switches.",
+    "price": 89.99,
+    "category": "Accessories",
+    "imageUrl": "/images/keyboard.jpg",
+    "stock": 45
+  },
+  {
+    "id": "12",
+    "name": "Noise-Cancelling Earbuds",
+    "description": "True wireless earbuds with active noise cancellation.",
+    "price": 79.99,
+    "category": "Audio",
+    "imageUrl": "/images/earbuds.jpg",
+    "stock": 50
+  },
+  {
+    "id": "13",
+    "name": "Smartphone Gimbal",
+    "description": "3-axis handheld gimbal stabilizer for smartphones.",
+    "price": 119.0,
+    "category": "Photography",
+    "imageUrl": "/images/gimbal.jpg",
+    "stock": 22
+  },
+  {
+    "id": "14",
+    "name": "Portable Projector",
+    "description": "Mini portable projector, 1080p supported.",
+    "price": 159.99,
+    "category": "Home Theater",
+    "imageUrl": "/images/projector.jpg",
+    "stock": 18
+  },
+  {
+    "id": "15",
+    "name": "Fitness Tracker",
+    "description": "Slim fitness band with sleep tracking.",
+    "price": 49.99,
+    "category": "Wearables",
+    "imageUrl": "/images/fitnesstracker.jpg",
+    "stock": 80
+  },
+  {
+    "id": "16",
+    "name": "Drone with Camera",
+    "description": "Quadcopter drone with 4K camera and GPS.",
+    "price": 349.0,
+    "category": "Drones",
+    "imageUrl": "/images/drone.jpg",
+    "stock": 6
+  },
+  {
+    "id": "17",
+    "name": "Wireless Charger",
+    "description": "Fast wireless charging pad compatible with Qi devices.",
+    "price": 29.99,
+    "category": "Accessories",
+    "imageUrl": "/images/charger.jpg",
+    "stock": 70
+  },
+  {
+    "id": "18",
+    "name": "Smart Light Bulb",
+    "description": "Color-changing smart bulb controllable via app.",
+    "price": 19.99,
+    "category": "Home Automation",
+    "imageUrl": "/images/lightbulb.jpg",
+    "stock": 120
+  },
+  {
+    "id": "19",
+    "name": "Electric Kettle",
+    "description": "1.7L rapid boil electric kettle.",
+    "price": 34.99,
+    "category": "Kitchen",
+    "imageUrl": "/images/kettle.jpg",
+    "stock": 40
+  },
+  {
+    "id": "20",
+    "name": "Action Camera",
+    "description": "4K action camera with waterproof case.",
+    "price": 89.0,
+    "category": "Photography",
+    "imageUrl": "/images/actioncamera.jpg",
+    "stock": 25
+  }
+]
