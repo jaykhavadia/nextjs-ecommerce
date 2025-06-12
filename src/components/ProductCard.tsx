@@ -17,12 +17,12 @@ type Props = {
 export default function ProductCard({ product }: Props) {
   return (
     <Card>
-      <CardMedia
+      {/* <CardMedia
         component="img"
         height="180"
         image={product.imageUrl}
         alt={product.name}
-      />
+      /> */}
       <CardContent>
         <Typography variant="h6">{product.name}</Typography>
         <Typography variant="body2" color="text.secondary">

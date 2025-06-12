@@ -24,12 +24,12 @@ export default async function ProductDetailPage({ params }: Props) {
 
   return (
     <Card sx={{ maxWidth: 900, mx: "auto" }}>
-      <CardMedia
+      {/* <CardMedia
         component="img"
         height="400"
         image={product.imageUrl}
         alt={product.name}
-      />
+      /> */}
       <CardContent>
         <Typography variant="h4" gutterBottom>
           {product.name}
