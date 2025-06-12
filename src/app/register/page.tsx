@@ -7,7 +7,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { fetcher } from '@/utils/fetcher';
 
 export default function RegisterPage() {
-  const { login } = useAuth(); // optionally auto-login after register
+  const { login } = useAuth();
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -31,11 +31,8 @@ export default function RegisterPage() {
 
     try {
       if (email && password.length >= 6) {
-        // Call register API
         await fetcher.post('/auth/register', { name, email, password });
-        // Auto-login after successful registration
         const success = await login(email, password);
-        console.log("🚀 ~ handleSubmit ~ success:", success)
         if (success) {
           router.push('/products');
         } else {

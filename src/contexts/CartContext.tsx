@@ -30,12 +30,10 @@ export const CartProvider = ({
   initialCart?: CartItem[];
 }) => {
   const [cart, setCart] = useState<CartItem[]>(initialCart || []);
-  // Fetch cart data from API on mount if no initialCart provided
   useEffect(() => {
     if (!initialCart) {
       const fetchCart = async () => {
         try {
-          console.log("Fetching cart data from API...");
           const { data } = await fetcher.get<{ data: { items: CartItem[] } }>(
             "/cart"
           );
@@ -62,7 +60,6 @@ export const CartProvider = ({
 
   const removeFromCart = async (productId: string) => {
     try {
-      // Assuming DELETE /cart/:productId endpoint exists
       await fetcher.delete(`/cart/${productId}`);
       const { data } = await fetcher.get<{ data: { items: CartItem[] } }>(
         "/cart"
@@ -75,7 +72,6 @@ export const CartProvider = ({
 
   const updateQuantity = async (productId: string, quantity: number) => {
     try {
-      // Assuming PUT /cart endpoint to update quantity
       await fetcher.put("/cart", { productId, quantity });
       const { data } = await fetcher.get<{ data: { items: CartItem[] } }>(
         "/cart"
@@ -88,7 +84,6 @@ export const CartProvider = ({
 
   const clearCart = async () => {
     try {
-      // Assuming DELETE /cart endpoint to clear cart
       await fetcher.delete("/cart");
       setCart([]);
     } catch (error) {
