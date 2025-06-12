@@ -1,58 +1,30 @@
-'use client';
-import RequireAuth from '@/components/RequireAuth';
+import RequireAuth from "@/components/RequireAuth";
+import CartPageClient from "./CartPageClient";
+import { fetcher } from "@/utils/fetcher";
+import { CartItem } from "@/contexts/CartContext";
 
-export default function CartWrapper() {
+async function fetchCartData(): Promise<CartItem[]> {
+  try {
+    const { data } = await fetcher.get<any>("/cart");
+    console.log("🚀 ~ fetchCartData ~ data:", data);
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch cart data:", error);
+    return [];
+  }
+}
+
+export default async function CartPage() {
+  const cartData = await fetchCartData();
+  console.log("🚀 ~ CartPage ~ cartData:", cartData)
+
   return (
     <RequireAuth>
-      <CartPage />
+      <CartProvider initialCart={cartData}>
+        <CartPageClient />
+      </CartProvider>
     </RequireAuth>
   );
 }
 
-
-import { useCart } from '@/contexts/CartContext';
-import { Typography, List, ListItem, ListItemText, IconButton, TextField, Box, Button } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-
-function CartPage() {
-  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  return (
-    <Box>
-      <Typography variant="h4" gutterBottom>Shopping Cart</Typography>
-      {cart.length === 0 ? (
-        <Typography>Your cart is empty.</Typography>
-      ) : (
-        <>
-          <List>
-            {cart.map((item) => (
-              <ListItem key={item.id} alignItems="flex-start">
-                <ListItemText
-                  primary={`${item.name} - ₹${item.price}`}
-                  secondary={
-                    <Box display="flex" alignItems="center" gap={2} mt={1}>
-                      <TextField
-                        type="number"
-                        label="Qty"
-                        size="small"
-                        value={item.quantity}
-                        inputProps={{ min: 1 }}
-                        onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-                      />
-                      <IconButton edge="end" onClick={() => removeFromCart(item.id)}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </Box>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-          <Typography variant="h6" mt={3}>Total: ₹{total.toFixed(2)}</Typography>
-          <Button onClick={clearCart} variant="outlined" sx={{ mt: 2 }}>Clear Cart</Button>
-        </>
-      )}
-    </Box>
-  );
-}
+import { CartProvider } from "@/contexts/CartContext";

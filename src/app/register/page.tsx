@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { TextField, Button, Typography, Paper, Box } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../contexts/AuthContext';
+import { fetcher } from '@/utils/fetcher';
 
 export default function RegisterPage() {
   const { login } = useAuth(); // optionally auto-login after register
   const router = useRouter();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -22,12 +24,23 @@ export default function RegisterPage() {
       return;
     }
 
+    if (!name) {
+      setError('Name is required');
+      return;
+    }
+
     try {
-      // 🔒 Replace with your actual API call to register user
       if (email && password.length >= 6) {
-        // simulate user creation
-        await login(email, password); // auto-login
-        router.push('/products');
+        // Call register API
+        await fetcher.post('/auth/register', { name, email, password });
+        // Auto-login after successful registration
+        const success = await login(email, password);
+        console.log("🚀 ~ handleSubmit ~ success:", success)
+        if (success) {
+          router.push('/products');
+        } else {
+          setError('Auto-login failed after registration');
+        }
       } else {
         setError('Password must be at least 6 characters');
       }
@@ -42,6 +55,14 @@ export default function RegisterPage() {
         Register
       </Typography>
       <form onSubmit={handleSubmit}>
+        <TextField
+          fullWidth
+          label="Name"
+          margin="normal"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
         <TextField
           fullWidth
           label="Email"

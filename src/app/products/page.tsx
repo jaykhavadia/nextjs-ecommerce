@@ -20,15 +20,24 @@ export default async function ProductsPage({ searchParams }: Props) {
         Products
       </Typography>
 
-      <Box display="grid" gap={3  } gridTemplateColumns="repeat(auto-fill, minmax(280px, 1fr))">
-        {products.map((product: Product) => (
-          <Box key={product.id}>
-            <ProductCard product={product} />
+      {!products || products?.length === 0 ? (
+        <Typography variant="body1">No products available.</Typography>
+      ) : (
+        <>
+          <Box
+            display="grid"
+            gap={3}
+            gridTemplateColumns="repeat(auto-fill, minmax(280px, 1fr))"
+          >
+            {products.map((product: Product) => (
+              <Box key={product.id}>
+                <ProductCard product={product} />
+              </Box>
+            ))}
           </Box>
-        ))}
-      </Box>
-
-      <PaginationWrapper totalPages={totalPages} currentPage={page} />
+          <PaginationWrapper totalPages={totalPages} currentPage={page} />
+        </>
+      )}
     </>
   );
 }
