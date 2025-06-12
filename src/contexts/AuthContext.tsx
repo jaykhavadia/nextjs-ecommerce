@@ -3,40 +3,28 @@
 import {
   createContext,
   useContext,
+  ReactNode,
   useState,
   useEffect,
-  ReactNode,
 } from "react";
 import { fetcher } from "@/utils/fetcher";
 
-type User = {
-  email: string;
-};
-
 type AuthContextType = {
-  user: User | null;
   login: (email: string, password: string) => Promise<boolean>;
+  token: string | null;
   logout: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) setUser(JSON.parse(savedUser));
-  }, []);
-
   const login = async (email: string, password: string) => {
     try {
       const { data } = await fetcher.post<any>("/auth/login", {
         email,
         password,
       });
-      console.log("🚀 ~ login ~ data:", data)
-      if (data && data.token ) {
+      if (data && data.token) {
         localStorage.setItem("token", data.token);
         return true;
       }
@@ -48,12 +36,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
   };
 
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) setToken(storedToken);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ login, logout, token }}>
       {children}
     </AuthContext.Provider>
   );

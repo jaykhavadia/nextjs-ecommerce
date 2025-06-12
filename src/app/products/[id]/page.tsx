@@ -18,7 +18,6 @@ type Props = {
 
 export default async function ProductDetailPage({ params }: Props) {
   const product = await getProductById(params.id);
-
   if (!product) {
     notFound();
   }
@@ -36,7 +35,7 @@ export default async function ProductDetailPage({ params }: Props) {
           {product.name}
         </Typography>
         <Typography variant="h6" color="text.secondary">
-          ₹{product.price.toFixed(2)}
+          ₹{product?.price?.toFixed(2)}
         </Typography>
         <Typography variant="body1" sx={{ mt: 2 }}>
           {product.description}

@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import Link from 'next/link';
-import { useAuth } from '../contexts/AuthContext';
-import { usePathname, useRouter } from 'next/navigation';
+import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
+import Link from "next/link";
+import { useAuth } from "../contexts/AuthContext";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { logout, token } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
 
   const handleLogout = () => {
     logout();
-    router.push('/login');
+    router.push("/login");
   };
 
-  const showLogin = !user && pathname !== '/login' && pathname !== '/register';
-  const showRegister = pathname === '/login';
-  const showLoginFromRegister = pathname === '/register';
+  const showLogin = pathname !== "/login" && pathname !== "/register";
+  const showRegister = pathname === "/login";
+  const showLoginFromRegister = pathname === "/register";
 
   return (
     <AppBar position="static">
@@ -26,11 +26,17 @@ export default function Navbar() {
           E-Commerce
         </Typography>
         <Box>
-          <Button color="inherit" component={Link} href="/products">Products</Button>
-          <Button color="inherit" component={Link} href="/cart">Cart</Button>
+          <Button color="inherit" component={Link} href="/products">
+            Products
+          </Button>
+          <Button color="inherit" component={Link} href="/cart">
+            Cart
+          </Button>
 
-          {user ? (
-            <Button color="inherit" onClick={handleLogout}>Logout</Button>
+          {token ? (
+            <Button color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>
           ) : (
             <>
               {showLogin && (

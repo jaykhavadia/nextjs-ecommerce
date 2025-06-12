@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@mui/material';
-import { Product } from '@/types/product';
-import { useCart } from '@/contexts/CartContext';
-import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { Button } from "@mui/material";
+import { Product } from "@/types/product";
+import { useCart } from "@/contexts/CartContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function AddToCartButton({ product }: { product: Product }) {
-  const { user } = useAuth();
+  const token = localStorage.getItem("token");
   const { addToCart } = useCart();
   const router = useRouter();
   const [added, setAdded] = useState(false);
 
   const handleAdd = () => {
-    if (!user) {
-      router.push('/login');
+    if (!token) {
+      router.push("/login");
       return;
     }
 
-    addToCart(product);
+    addToCart(product._id, 1);  
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };
@@ -33,11 +33,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
       onClick={handleAdd}
       disabled={isOutOfStock || added}
     >
-      {isOutOfStock
-        ? 'Out of Stock'
-        : added
-        ? 'Added!'
-        : 'Add to Cart'}
+      {isOutOfStock ? "Out of Stock" : added ? "Added!" : "Add to Cart"}
     </Button>
   );
 }

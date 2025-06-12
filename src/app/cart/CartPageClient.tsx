@@ -17,8 +17,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 export default function CartPageClient() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
   const total =
-    cart && cart?.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  console.log("🚀 ~ CartPageClient ~ cart:", cart);
+    cart.length &&
+    cart?.reduce((sum, item) => sum + item.productId.price * item.quantity, 0);
 
   return (
     <Paper elevation={3} sx={{ p: 3 }}>
@@ -32,10 +32,10 @@ export default function CartPageClient() {
       ) : (
         <>
           <List>
-            {cart.map((item) => (
-              <ListItem key={item.id} alignItems="flex-start">
+            {cart?.map((item) => (
+              <ListItem key={item._id} alignItems="flex-start">
                 <ListItemText
-                  primary={`${item.name} - ₹${item.price}`}
+                  primary={`${item.productId.name} - ₹${item.productId.price}`}
                   secondary={
                     <Box display="flex" alignItems="center" gap={2} mt={1}>
                       <TextField
@@ -50,7 +50,7 @@ export default function CartPageClient() {
                       />
                       <IconButton
                         edge="end"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeFromCart(item._id)}
                       >
                         <DeleteIcon />
                       </IconButton>

@@ -1,18 +1,24 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
 
 export default function RequireAuth({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
   const router = useRouter();
+  const [hasToken, setHasToken] = useState<boolean | null>(null);
 
   useEffect(() => {
-    if (!user) {
+    const token = localStorage.getItem('token');
+    if (!token) {
       router.replace('/login');
+    } else {
+      setHasToken(true);
     }
-  }, [user, router]);
+  }, [router]);
 
-  return <>{user && children}</>;
+  if (hasToken === null) {
+    return null;
+  }
+
+  return <>{hasToken && children}</>;
 }

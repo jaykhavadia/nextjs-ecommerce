@@ -1,18 +1,23 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
-export default function RedirectIfAuth({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
+export default function RedirectIfAuth({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const token = localStorage.getItem("token");  
+
   const router = useRouter();
 
   useEffect(() => {
-    if (user) {
-      router.replace('/products');
+    if (token) {
+      router.replace("/products");
     }
-  }, [user, router]);
+  }, [token, router]);
 
-  return <>{!user && children}</>;
+  return <>{!token && children}</>;
 }

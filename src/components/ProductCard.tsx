@@ -33,7 +33,7 @@ export default function ProductCard({ product }: Props) {
         </Typography>
         <Button
           component={Link}
-          href={`/products/${product.id}`}
+          href={`/products/${product._id}`}
           size="small"
           sx={{ mt: 1 }}
         >

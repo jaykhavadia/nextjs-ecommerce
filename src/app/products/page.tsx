@@ -5,15 +5,15 @@ import { Typography, Box } from "@mui/material";
 import PaginationWrapper from "@/components/PaginationWrapper";
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     page?: string;
-  };
+  }>;
 };
 
 export default async function ProductsPage({ searchParams }: Props) {
-  const page = parseInt(searchParams.page || "1", 10);
+  const params = await searchParams;
+  const page = parseInt(params?.page || "1", 10);
   const { products, totalPages } = await getProducts(page);
-
   return (
     <>
       <Typography variant="h4" gutterBottom>
@@ -30,7 +30,7 @@ export default async function ProductsPage({ searchParams }: Props) {
             gridTemplateColumns="repeat(auto-fill, minmax(280px, 1fr))"
           >
             {products.map((product: Product) => (
-              <Box key={product.id}>
+              <Box key={product._id}>
                 <ProductCard product={product} />
               </Box>
             ))}
