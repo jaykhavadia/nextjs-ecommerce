@@ -1,19 +1,28 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import Link from "next/link";
 import { useAuth } from "../contexts/AuthContext";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
-  const { logout, token } = useAuth();
+  const { logout, token, hydrated } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleLogout = () => {
     logout();
     router.push("/login");
   };
+
+  if (!mounted || !hydrated) return null;
 
   const showLogin = pathname !== "/login" && pathname !== "/register";
   const showRegister = pathname === "/login";

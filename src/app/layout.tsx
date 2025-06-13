@@ -1,8 +1,8 @@
-import { AuthProvider } from "@/contexts/AuthContext";
-import Navbar from "@/components/Navbar";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import ThemeRegistry from "@/components/ThemeRegistry";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { CartProvider } from "@/contexts/CartContext";
+import NavbarWrapperClient from "@/components/NavbarWrapperClient";
 
 export const metadata = {
   title: "E-Commerce App",
@@ -12,18 +12,12 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>  
+      <body>
         <ThemeRegistry>
           <AuthProvider>
             <CartProvider>
-              <Navbar />
-              <main
-                style={{
-                  padding: "2rem",
-                  maxWidth: "1200px",
-                  margin: "0 auto",
-                }}
-              >
+              <NavbarWrapperClient />
+              <main style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
                 {children}
               </main>
             </CartProvider>

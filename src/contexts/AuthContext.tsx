@@ -13,6 +13,7 @@ type AuthContextType = {
   login: (email: string, password: string) => Promise<boolean>;
   token: string | null;
   logout: () => void;
+  hydrated: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -39,14 +40,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const [token, setToken] = useState<string | null>(null);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) setToken(storedToken);
+    setHydrated(true);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ login, logout, token }}>
+    <AuthContext.Provider value={{ login, logout, token, hydrated }}>
       {children}
     </AuthContext.Provider>
   );
